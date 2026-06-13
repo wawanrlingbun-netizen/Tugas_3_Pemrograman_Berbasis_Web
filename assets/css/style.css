@@ -1,1 +1,375 @@
+/* ==========================================================================
+   GAYA UTAMA & GLOBAL RESET
+   ========================================================================== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f4f6f9; 
+    margin: 0; 
+    padding: 0; 
+    color: #333333;
+}
 
+/* ==========================================================================
+   BANNER HEADER BIRU PEKAT KHAS UT
+   ========================================================================== */
+.banner-ut {
+    background-color: #004481; 
+    color: #ffffff; 
+    padding: 25px 40px; 
+    margin-bottom: 20px;
+}
+.banner-ut h2 { 
+    margin: 0 0 8px 0; 
+    font-size: 26px; 
+    font-weight: bold; 
+    color: #ffffff; 
+}
+.banner-ut p { 
+    margin: 0; 
+    font-size: 14px; 
+    color: #ffffff; 
+    opacity: 0.9; 
+}
+
+/* ==========================================================================
+   STRUKTUR KANCING TAB NAVIGASI
+   ========================================================================== */
+.tab-navigation-bar { 
+    padding: 0 40px; 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 10px; 
+}
+.tab-navigation-bar button {
+    background-color: #0070c0; 
+    color: white; 
+    border: none; 
+    padding: 8px 18px;
+    font-size: 13px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.tab-navigation-bar button.active { 
+    background-color: #004481; 
+    font-weight: bold; 
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+.tab-navigation-bar button:hover { 
+    background-color: #005aa3; 
+}
+
+/* ==========================================================================
+   TATA LETAK KONTEN & SUB-HEADING
+   ========================================================================== */
+.app-container { 
+    padding: 0 40px 40px 40px; 
+}
+h2 { font-size: 22px; margin-bottom: 15px; color: #111111; font-weight: bold; }
+h3 { font-size: 16px; margin-top: 10px; margin-bottom: 15px; color: #222222; font-weight: bold; }
+
+/* ==========================================================================
+   STRUKTUR FORM TAMBAH DATA STOK
+   ========================================================================== */
+.form-card-ut { 
+    border: 1px solid #e5e7eb; 
+    border-radius: 4px; 
+    overflow: hidden; 
+    margin-bottom: 25px; 
+    background: white; 
+}
+.form-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.form-table td { 
+    padding: 10px 15px; 
+    border-bottom: 1px solid #f3f4f6; 
+    vertical-align: middle; 
+}
+.label-col { 
+    width: 25%; 
+    background-color: #ffffff; 
+    font-size: 14px; 
+    color: #4b5563; 
+}
+.form-control-ut { 
+    width: 320px; 
+    padding: 6px 12px; 
+    border: 1px solid #d1d5db; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 14px; 
+    color: #374151;
+}
+.form-control-ut:focus {
+    outline: none;
+    border-color: #0070c0;
+}
+.form-actions { 
+    background-color: #f8fafc; 
+    padding: 12px 15px; 
+    border-top: 1px solid #e5e7eb; 
+}
+.btn-ut-primary { 
+    background-color: #0070c0; 
+    color: white; 
+    border: none; 
+    padding: 7px 16px; 
+    font-size: 13px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-weight: 500;
+}
+.btn-ut-primary:hover { 
+    background-color: #005aa3; 
+}
+
+/* ==========================================================================
+   BARIS FILTER PENCARIAN SUB-TABEL
+   ========================================================================== */
+.filter-bar-ut { 
+    display: flex; 
+    gap: 10px; 
+    margin: 25px 0 15px 0; 
+    align-items: center; 
+}
+.filter-input { 
+    padding: 6px 12px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    width: 220px; 
+    font-size: 13px; 
+}
+.filter-select { 
+    padding: 6px 10px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 4px; 
+    background-color: white; 
+    font-size: 13px; 
+    min-width: 140px; 
+}
+
+/* ==========================================================================
+   STYLING TABEL INTERAKTIF DATA STOK
+   ========================================================================== */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+.table-custom-ut {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #333333;
+    background-color: #ffffff;
+}
+/* Header Tabel Biru Cerah */
+.table-custom-ut th {
+    background-color: #0070c0; 
+    color: #ffffff;
+    font-weight: bold;
+    padding: 12px 10px;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px solid rgba(255, 255, 255, 0.3); 
+}
+.table-custom-ut th:last-child {
+    border-right: none;
+}
+/* Sel Isi Data */
+.table-custom-ut td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0; 
+    background-color: #ffffff;
+}
+.table-custom-ut td:last-child {
+    border-right: none;
+}
+.table-custom-ut tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* ==========================================================================
+   INPUT BOX DI DALAM TABEL (QTY & SAFETY)
+   ========================================================================== */
+.table-input-ut {
+    width: 100%;
+    max-width: 140px; 
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px; 
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #333333;
+    box-sizing: border-box;
+}
+.table-input-ut:focus {
+    outline: none;
+    border-color: #0070c0;
+}
+
+/* ==========================================================================
+   BADGE STATUS KAPSUL OVAL (AMAN & MENIPIS)
+   ========================================================================== */
+.badge-ut-success {
+    background-color: #2ea44f; 
+    color: #ffffff;
+    padding: 5px 16px;
+    border-radius: 20px; 
+    font-size: 13px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 60px;
+}
+.badge-ut-warning {
+    background-color: #f0881a; 
+    color: #ffffff;
+    padding: 5px 14px;
+    border-radius: 20px; 
+    font-size: 13px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 60px;
+}
+
+/* ==========================================================================
+   TOMBOL AKSI HAPUS DALAM TABEL
+   ========================================================================== */
+.btn-ut-danger {
+    background-color: #0070c0; 
+    color: #ffffff;
+    border: none;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 4px; 
+    cursor: pointer;
+}
+.btn-ut-danger:hover {
+    background-color: #005aa3; 
+}
+
+/* ==========================================================================
+   STRUKTUR LAIN (TRACKING CARD & TIMELINE)
+   ========================================================================== */
+.tracking-card { 
+    background: white; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 4px; 
+    padding: 20px; 
+    margin-bottom: 15px; 
+}
+.do-header { 
+    display: flex; 
+    justify-content: space-between; 
+    border-bottom: 1px solid #f1f5f9; 
+    padding-bottom: 10px; 
+    margin-bottom: 10px; 
+}
+.table-receipt td { padding: 4px 10px 4px 0; font-size: 14px; }
+.timeline { margin: 15px 0 0 0; padding-left: 20px; font-size: 13px; line-height: 1.6; color: #475569; }
+.loading-text { text-align: center; padding: 40px; color: #64748b;
+}
+/* ==========================================================================
+   STYLING FORM LOGIN ADMIN UT (MODERN PANEL)
+   ========================================================================== */
+.login-wrapper-ut {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f1f5f9;
+}
+.login-box-ut {
+    background: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 35px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+.login-header-ut {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.login-header-ut h3 {
+    margin: 0 0 6px 0;
+    font-size: 22px;
+    color: #004481;
+    font-weight: bold;
+}
+.login-header-ut p {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+}
+.login-group-ut {
+    margin-bottom: 18px;
+}
+.login-group-ut label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+}
+.login-control-ut {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #334155;
+    background-color: #ffffff;
+}
+.login-control-ut:focus {
+    outline: none;
+    border-color: #004481;
+    box-shadow: 0 0 0 2px rgba(0, 68, 129, 0.15);
+}
+.btn-login-ut {
+    width: 100%;
+    background-color: #004481;
+    color: #ffffff;
+    border: none;
+    padding: 11px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+.btn-login-ut:hover {
+    background-color: #002c53;
+}
+
+/* ==========================================================================
+   TOMBOL KELUAR SISTEM / LOGOUT (MERAH)
+   ========================================================================== */
+.btn-logout-ut {
+    background-color: #dc2626; /* Merah menyala cerah */
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.btn-logout-ut:hover {
+    background-color: #991b1b; /* Merah gelap */
+}
