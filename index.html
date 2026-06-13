@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pemesanan Bahan Ajar UT</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 1. HALAMAN FORM LOGIN (Muncul jika belum login) -->
+        <div v-if="!isLoggedIn" class="login-wrapper-ut">
+            <div class="login-box-ut">
+                <div class="login-header-ut">
+                    <img src="https://sl.ut.ac.id/iconut" alt="Logo UT" style="height: 50px; margin-bottom: 10px; display:none;" onerror="this.style.display='none'">
+                    <h3>Gudang Logistik UT</h3>
+                    <p>Silakan masuk menggunakan akun Administrator</p>
+                </div>
+                <form @submit.prevent="handleLogin">
+                    <div class="login-group-ut">
+                        <label>Username</label>
+                        <input type="text" v-model="loginForm.username" class="login-control-ut" placeholder="Masukkan adminUT" required />
+                    </div>
+                    <div class="login-group-ut">
+                        <label>Password</label>
+                        <input type="password" v-model="loginForm.password" class="login-control-ut" placeholder="Masukkan admin123" required />
+                    </div>
+                    <button type="submit" class="btn-login-ut">Masuk Sistem</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 2. HALAMAN DASHBOARD UTAMA (Muncul jika sudah login sukses) -->
+        <div v-else>
+            <!-- Banner Header -->
+            <header class="banner-ut">
+                <h2>Sistem Pemesanan Bahan Ajar UT</h2>
+                <p>Sistem Informasi Tracking dan Pemesanan Bahan Ajar Universitas Terbuka</p>
+            </header>
+
+            <!-- Menu Navigasi Tab + Tombol Keluar Sistem -->
+            <div class="tab-navigation-bar" style="justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 10px;">
+                    <button :class="{ active: currentTab === 'stok' }" @click="setTab('stok')">Stok Bahan Ajar</button>
+                    <button :class="{ active: currentTab === 'order' }" @click="setTab('order')">Pemesanan</button>
+                    <button :class="{ active: currentTab === 'tracking' }" @click="setTab('tracking')">Tracking DO</button>
+                </div>
+                <!-- Tombol Keluar/Logout Admin -->
+                <button @click="handleLogout" class="btn-logout-ut">Keluar Sistem</button>
+            </div>
+
+            <!-- Wadah Konten Utama Dinamis -->
+            <main class="app-container">
+                <div v-if="loading" class="loading-text">
+                    Sinkronisasi database instansi...
+                </div>
+
+                <div v-else>
+                    <div v-if="currentTab === 'stok'">
+                        <h2>Data Stok Bahan Ajar</h2>
+                        <ba-stock-table 
+                            :items="stokBahanAjar" 
+                            :upbjj-list="upbjjData" 
+                            :kategori-list="kategoriData"
+                            @add-stock="addNewStock"
+                            @delete-stock="deleteStock">
+                        </ba-stock-table>
+                    </div>
+
+                    <div v-if="currentTab === 'order'">
+                        <ba-order-form 
+                            :paket-list="paketData" 
+                            :pengiriman-list="pengirimanData"
+                            @submit-order="handleNewOrder">
+                        </ba-order-form>
+                    </div>
+
+                    <div v-if="currentTab === 'tracking'">
+                        <ba-do-tracking :tracking-data="trackingData"></ba-do-tracking>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="./js/services/api.js"></script>
+    <script src="./js/components/status-badge.js"></script>
+    <script src="./js/components/stock-table.js"></script>
+    <script src="./js/components/order-form.js"></script>
+    <script src="./js/components/do-tracking.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
