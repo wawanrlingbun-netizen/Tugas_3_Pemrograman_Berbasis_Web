@@ -1,0 +1,42 @@
+<div class="order-section-ut">
+    <h3>Formulir Pemesanan Bahan Ajar</h3>
+    <div class="form-card-ut">
+        <form @submit.prevent="processOrder" class="ut-table-form">
+            <table class="form-table">
+                <tr>
+                    <td class="label-col"><label>NIM Mahasiswa</label></td>
+                    <td><input type="text" v-model="order.nim" class="form-control-ut" placeholder="Masukkan NIM" required /></td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Nama Lengkap</label></td>
+                    <td><input type="text" v-model="order.nama" class="form-control-ut" placeholder="Masukkan Nama Lengkap" required /></td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Pilih Paket / Modul</label></td>
+                    <td>
+                        <select v-model="order.paketKode" class="form-control-ut" required>
+                            <option value="" disabled selected>Pilih Paket Bahan Ajar</option>
+                            <option v-for="p in paketList" :key="p.kode" :value="p.kode">
+                                {{ p.nama }} - (Rp {{ p.harga.toLocaleString('id-ID') }})
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Metode Pengiriman</label></td>
+                    <td>
+                        <select v-model="order.pengiriman" class="form-control-ut" required>
+                            <option value="" disabled selected>Pilih Layanan</option>
+                            <option v-for="exp in pengirimanList" :key="exp.kode" :value="exp.kode">
+                                {{ exp.nama }}
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="form-actions">
+                <button type="submit" class="btn-ut-primary">Proses Pemesanan</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="table-section-ut">
+    <h3>Tambah Data Stok</h3>
+    <div class="form-card-ut">
+        <form @submit.prevent="submitForm" class="ut-table-form">
+            <table class="form-table">
+                <tr>
+                    <td class="label-col"><label>Kode</label></td>
+                    <td><input type="text" v-model="form.kode" class="form-control-ut" required /></td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Judul</label></td>
+                    <td><input type="text" v-model="form.judul" class="form-control-ut" required /></td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Kategori</label></td>
+                    <td>
+                        <select v-model="form.kategori" class="form-control-ut" required>
+                            <option value="" disabled selected>Pilih Kategori</option>
+                            <option v-for="kat in kategoriList" :key="kat" :value="kat">{{ kat }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>UPBJJ</label></td>
+                    <td>
+                        <select v-model="form.upbjj" class="form-control-ut" required>
+                            <option value="" disabled selected>Pilih UPBJJ</option>
+                            <option v-for="upbjj in upbjjList" :key="upbjj" :value="upbjj">{{ upbjj }}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Lokasi Rak</label></td>
+                    <td><input type="text" v-model="form.lokasiRak" class="form-control-ut" required /></td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Harga</label></td>
+                    <td><input type="number" v-model.number="form.harga" class="form-control-ut" required /></td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Qty</label></td>
+                    <td><input type="number" v-model.number="form.qty" class="form-control-ut" required /></td>
+                </tr>
+                <tr>
+                    <td class="label-col"><label>Safety</label></td>
+                    <td><input type="number" v-model.number="form.safety" class="form-control-ut" required /></td>
+                </tr>
+            </table>
+            <div class="form-actions">
+                <button type="submit" class="btn-ut-primary">Tambah Data</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Baris Filter Pencarian -->
+    <div class="filter-bar-ut">
+        <input type="text" v-model="filters.search" placeholder="Cari Judul..." class="filter-input" />
+        
+        <select v-model="filters.upbjj" class="filter-select">
+            <option value="">Semua UPBJJ</option>
+            <option v-for="upbjj in upbjjList" :key="upbjj" :value="upbjj">{{ upbjj }}</option>
+        </select>
+        
+        <select v-model="filters.kategori" class="filter-select">
+            <option value="">Semua Kategori</option>
+            <option v-for="kat in kategoriList" :key="kat" :value="kat">{{ kat }}</option>
+        </select>
+        
+        <button @click="resetFilter" class="btn-ut-primary">Reset Filter</button>
+    </div>
+
+    <!-- Tabel Utama Hasil Penyesuaian Mockup image_56604d.png -->
+    <div class="table-responsive">
+        <table class="table-custom-ut">
+            <thead>
+                <tr>
+                    <th>Kode</th>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>UPBJJ</th>
+                    <th>Lokasi Rak</th>
+                    <th>Harga</th>
+                    <th style="width: 120px;">Qty</th>
+                    <th style="width: 120px;">Safety</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in filteredItems" :key="item.kode">
+                    <td><strong>{{ item.kode }}</strong></td>
+                    <td>{{ item.judul }}</td>
+                    <td>{{ item.kategori }}</td>
+                    <td>{{ item.upbjj }}</td>
+                    <td>{{ item.lokasiRak }}</td>
+                    <td>Rp {{ item.harga.toLocaleString('id-ID') }}</td>
+                    
+                    <!-- Qty Input Box -->
+                    <td>
+                        <input type="number" v-model.number="item.qty" class="table-input-ut" min="0" />
+                    </td>
+                    
+                    <!-- Safety Input Box -->
+                    <td>
+                        <input type="number" v-model.number="item.safety" class="table-input-ut" min="0" />
+                    </td>
+                    
+                    <!-- Status Badge Dinamis -->
+                    <td>
+                        <ba-status-badge :status="item.qty >= item.safety ? 'Aman' : 'Menipis'"></ba-status-badge>
+                    </td>
+                    
+                    <!-- Tombol Aksi Hapus -->
+                    <td>
+                        <button @click="deleteItem(item.kode)" class="btn-ut-danger">Hapus</button>
+                    </td>
+                </tr>
+                <tr v-if="filteredItems.length === 0">
+                    <td colspan="10" style="text-align: center; padding: 15px; color: #888;">Tidak ada data stok.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

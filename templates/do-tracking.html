@@ -1,0 +1,69 @@
+<div class="tracking-section-ut">
+    <h3>Pelacakan Pengiriman (DO) Manual</h3>
+    
+    <!-- Kolom Pencarian dengan Tombol Sesuai Kebutuhan -->
+    <div class="filter-bar-ut" style="margin-bottom: 25px; display: flex; gap: 8px;">
+        <input 
+            type="text" 
+            v-model="inputDo" 
+            placeholder="Masukkan Nomor DO (Contoh: DO2025-0001)..." 
+            class="filter-input" 
+            style="width: 320px;" 
+            @keyup.enter="triggerSearch"
+        />
+        <button @click="triggerSearch" class="btn-ut-primary">Cari Paket</button>
+        <button @click="resetSearch" class="btn-ut-primary" style="background-color: #64748b;">Reset</button>
+    </div>
+
+    <!-- Jika hasil pencarian manual ditemukan -->
+    <div v-if="isSearched && searchedResult" class="tracking-card" style="border: 2px solid #0070c0;">
+        <div class="do-box">
+            <div class="do-header">
+                <span><strong>No. DO:</strong> {{ activeSearchDo }}</span>
+                <ba-status-badge :status="searchedResult.status"></ba-status-badge>
+            </div>
+            <table class="table-receipt">
+                <tr><td><strong>Nama Mahasiswa</strong></td><td>: {{ searchedResult.nama }} (NIM: {{ searchedResult.nim }})</td></tr>
+                <tr><td><strong>Ekspedisi</strong></td><td>: {{ searchedResult.ekspedisi }} (Tgl Kirim: {{ searchedResult.tanggalKirim }})</td></tr>
+                <tr><td><strong>Total Bayar</strong></td><td>: Rp {{ searchedResult.total.toLocaleString('id-ID') }}</td></tr>
+            </table>
+            
+            <h5>Riwayat Perjalanan Paket:</h5>
+            <ul class="timeline">
+                <li v-for="log in searchedResult.perjalanan" :key="log.waktu">
+                    <small>{{ log.waktu }}</small> - <span>{{ log.keterangan }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Pesan jika nomor DO tidak ditemukan setelah klik tombol cari -->
+    <div v-else-if="isSearched && !searchedResult" class="tracking-card" style="text-align: center; color: #ef4444;">
+        <p>Nomor DO <strong>"{{ activeSearchDo }}"</strong> tidak ditemukan di sistem. Periksa kembali penulisan Anda.</p>
+    </div>
+
+    <!-- Tampilan default: Tampilkan semua daftar DO jika belum menekan tombol cari -->
+    <div v-else>
+        <h5>Semua Daftar Pengiriman Aktif:</h5>
+        <div v-for="(trackingObj, index) in trackingData" :key="index" class="tracking-card">
+            <div v-for="(detail, doNo) in trackingObj" :key="doNo" class="do-box">
+                <div class="do-header">
+                    <span><strong>No. DO:</strong> {{ doNo }}</span>
+                    <ba-status-badge :status="detail.status"></ba-status-badge>
+                </div>
+                <table class="table-receipt">
+                    <tr><td><strong>Nama Mahasiswa</strong></td><td>: {{ detail.nama }} (NIM: {{ detail.nim }})</td></tr>
+                    <tr><td><strong>Ekspedisi</strong></td><td>: {{ detail.ekspedisi }} (Tgl Kirim: {{ detail.tanggalKirim }})</td></tr>
+                    <tr><td><strong>Total Bayar</strong></td><td>: Rp {{ detail.total.toLocaleString('id-ID') }}</td></tr>
+                </table>
+                
+                <h5>Riwayat Perjalanan Paket:</h5>
+                <ul class="timeline">
+                    <li v-for="log in detail.perjalanan" :key="log.waktu">
+                        <small>{{ log.waktu }}</small> - <span>{{ log.keterangan }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
